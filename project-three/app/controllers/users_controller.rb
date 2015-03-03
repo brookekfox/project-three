@@ -9,9 +9,11 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.create(params.require(:user).permit(:first_name, :last_name, :email, :twitter, :instagram, :password, :password_confirmation, :avatar))
-		if @user
-			redirect_to new_session_path
+		if @user.save
+			puts 'it worked'
+			redirect_to new_sessions_path
 		else
+			puts 'it didnt work'
 			render 'new'
 		end
 	end

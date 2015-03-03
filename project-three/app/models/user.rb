@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 					 				  format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
 									  uniqueness: true
 	validates_presence_of :first_name, message: 'you have to have a first name'
+	validates :password_digest, presence: true
+
 	validates_format_of :twitter, with: /\A@[A-Za-z0-9_]{1,15}\Z/
 	validates_format_of :instagram, with: /\A@[A-Za-z0-9_]{1,15}\Z/
 
