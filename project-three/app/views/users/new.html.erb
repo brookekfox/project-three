@@ -1,0 +1,27 @@
+<div class="row">
+	<div class="col-md-12 text-center"><h1 class="heading">Hey, dum dum! Sign up!</h1></div>
+</div>
+
+<%# if @user.errors.any? %>
+	<!--<div id="error-explanation">-->
+		<!--Try again, dum dum!<br>-->
+		<%# @user.errors.full_messages.each do |msg| %>
+			<%#= msg %><br>
+		<%# end %>
+	<!--</div>-->
+<%# end %>
+
+<div>
+	<%= form_for @user do |f| %>
+		<%= f.text_field :first_name,                placeholder: 'FIRST NAME' %>
+		<%= f.text_field :last_name,                 placeholder: 'LAST NAME' %><br>
+		<%= f.text_field :email,                     placeholder: 'EMAIL' %><br><br>
+		<%= f.password_field :password,              placeholder: 'PASSWORD' %><br>
+		<%= f.password_field :password_confirmation, placeholder: 'CONFIRM PASSWORD' %><br>
+
+		<%= f.submit %>
+	<% end %>
+
+	<%= link_to 'I\'m already a user!', new_session_path %>
+</div>
+

@@ -1,0 +1,14 @@
+<div class="row">
+	<div class="col-md-12 text-center"></div>
+</div>
+
+<div class="ruby-form">
+	<%= form_for @user, url: { controller: 'sessions', action: 'create' } do |f| %>
+		<%= f.text_field :email, 				placeholder: 'EMAIL' %><br>
+		<%= f.password_field :password, placeholder: 'PASSWORD' %><br><br>
+
+		<%= f.submit 'Log In' %>
+	<% end %>
+
+	<%= link_to 'Create a new user!', new_user_path %>
+</div>

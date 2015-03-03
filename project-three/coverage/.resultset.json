@@ -1,0 +1,27 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/brookefox/Dropbox/wdi/projects/3-APIs/project-three/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brookefox/Dropbox/wdi/projects/3-APIs/project-three/app/helpers/categories_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brookefox/Dropbox/wdi/projects/3-APIs/project-three/app/helpers/recommendations_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brookefox/Dropbox/wdi/projects/3-APIs/project-three/app/helpers/sessions_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brookefox/Dropbox/wdi/projects/3-APIs/project-three/app/helpers/users_helper.rb": [
+        1,
+        null
+      ]
+    },
+    "timestamp": 1425352594
+  }
+}
