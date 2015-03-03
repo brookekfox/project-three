@@ -1,2 +1,31 @@
-<h1>Recommendations#new</h1>
-<p>Find me in app/views/recommendations/new.html.erb</p>
+<div class="row">
+	<div class="col-md-12 text-center"><h1 class="heading">Make a new recommendation!</h1></div>
+</div>
+
+<% if @user.errors.any? %>
+	<div id="error-explanation">
+		Try again, dum dum!<br>
+		<% @user.errors.full_messages.each do |msg| %>
+			<%= msg %><br>
+		<% end %>
+	</div>
+<% end %>
+
+<div>
+	<%= form_for @user do |f| %>
+		<%= radio_button_tag(:age, "child") %>
+		<%= label_tag(:age_child, "I am younger than 21") %>
+		<%= radio_button_tag(:age, "adult") %>
+		<%= label_tag(:age_adult, "I'm over 21") %>
+
+		<input id="age_child" name="age" type="radio" value="child" />
+		<label for="age_child">I am younger than 21</label>
+		<input id="age_adult" name="age" type="radio" value="adult" />
+		<label for="age_adult">I'm over 21</label>
+
+		<%= f.submit %>
+	<% end %>
+
+	<%= link_to 'I\'m already a user!', new_sessions_path %>
+</div>
+
