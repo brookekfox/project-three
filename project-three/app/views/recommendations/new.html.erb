@@ -13,22 +13,36 @@
 
 <div>
 	<%= form_for @recommendation do |f| %>
-		<%= f.collection_select :user_id, User.all, :id, :name, include_blank: 'User' %><br>
+		<%= f.collection_select :user_id, User.all, :id, :email, include_blank: 'User' %><br>
 
 		First choose TWITTER or INSTAGRAM: <br>
-			<%= f.radio_button_tag(:social_media, 'twitter') %>
-			<%= label_tag('Twitter') %>
-			<%= f.radio_button_tag(:social_media, 'instagram') %>
-			<%= label_tag('Instagram') %><br><br>
+			<%= f.radio_button(:social_media, 'twitter') %>
+			<%= f.label(:social_media, 'Twitter') %>
+			<%= f.radio_button(:social_media, 'instagram') %>
+			<%= f.label(:social_media, 'Instagram') %><br><br>
 		Now enter the handle you want to recommend:<br>
-			@<%= f.text_field :handle %><br>
+			@<%= f.text_field :handle %><br><br>
 
-		<%= f.check_box :is_public %>
-		<%= f.collection_select :user_id_to, User.all, :id, :name, include_blank: '' %><br>
+		Public? <%= f.check_box :is_public %><br>
+		If it's a private recommendation, to whom do you want to send it?<br>
+			<%= f.collection_select :user_id_to, User.all, :id, :email, include_blank: '' %><br><br>
+
+		Add some tags!
+			Blog <%= f.check_box :is_blog %>
+			Fashion <%= f.check_box :is_fashion %>
+			Film <%= f.check_box :is_film %>
+			Food <%= f.check_box :is_food %>
+			Funny <%= f.check_box :is_funny %>
+			Music <%= f.check_box :is_music %>
+			News <%= f.check_box :is_news %>
+			Sports <%= f.check_box :is_sports %>
+			TV <%= f.check_box :is_tv %>
+		<br><br>
+
 
 		<%= f.submit %>
 	<% end %>
 
-	<%= link_to 'I\'m already a user!', new_sessions_path %>
+	<%= link_to 'Cancel', user_path(session['user_id']) %>
 </div>
 

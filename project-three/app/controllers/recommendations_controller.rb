@@ -1,7 +1,8 @@
 class RecommendationsController < ApplicationController
 
   def index
-		@recommendations = Recommendation.all
+		@user = User.where(id: session['user_id']).first
+		@recommendations = Recommendation.where(user_id_to: session['user_id'])
 	end
 
 	def new
@@ -44,7 +45,7 @@ class RecommendationsController < ApplicationController
 
 	private
 		def recommendation_params
-			params.require(:item).permit(:social_media, :is_public, :handle, :user_id_to, :user_id, :is_funny, :is_food, :is_news, :is_fashion, :is_sports, :is_tv, :is_film, :is_music, :is_blog)
+			params.require(:recommendation).permit(:social_media, :is_public, :handle, :user_id_to, :user_id, :is_funny, :is_food, :is_news, :is_fashion, :is_sports, :is_tv, :is_film, :is_music, :is_blog)
 		end
 
 end

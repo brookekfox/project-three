@@ -1,2 +1,59 @@
-<h1>Recommendations#index</h1>
-<p>Find me in app/views/recommendations/index.html.erb</p>
+<h1>Hi <%= @user.first_name.capitalize %>!</h1>
+
+<%= link_to 'Make a new recommendation', new_recommendation_path(session['user_id']) %>
+
+<h2>RECOMMENDATIONS RECEIVED</h2>
+<div>
+	<table>
+		<thead>
+		<tr>
+			<th>FROM</th>
+			<th>SOCIAL MEDIA</th>
+			<th>HANDLE</th>
+			<th>TAGS</th>
+			<th colspan="4"></th>
+		</tr>
+		</thead>
+
+		<tbody>
+		<% @recommendations.each do |rec| %>
+			<tr>
+				<td><%= User.find(rec.user_id).email %></td>
+				<td><%= rec.social_media %></td>
+				<td>@<%= rec.handle %></td>
+				<td><%= link_to 'View', rec %>
+					<%= link_to 'Delete', rec, method: :delete, data: {confirm: "Are you sure?"} %>
+					<%= link_to 'Edit', edit_recommendation_path(rec) %></td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
+
+<h2>RECOMMENDATIONS SENT</h2>
+	<div>
+		<table>
+			<thead>
+			<tr>
+				<th>TO</th>
+				<th>SOCIAL MEDIA</th>
+				<th>HANDLE</th>
+				<th>TAGS</th>
+				<th colspan="4"></th>
+			</tr>
+			</thead>
+
+			<tbody>
+			<% @recommendations.each do |rec| %>
+				<tr>
+					<td><%= User.find(rec.user_id_to).email %></td>
+					<td><%= rec.social_media %></td>
+					<td>@<%= rec.handle %></td>
+					<td><%= link_to 'View', rec %>
+							<%= link_to 'Delete', rec, method: :delete, data: {confirm: "Are you sure?"} %>
+							<%= link_to 'Edit', edit_recommendation_path(rec) %></td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+	</div>
