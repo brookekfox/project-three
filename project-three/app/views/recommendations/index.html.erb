@@ -1,6 +1,7 @@
-<h1>Hi <%= @user.first_name.capitalize %>!</h1>
+<h1>Recommendations!</h1>
 
 <%= link_to 'Make a new recommendation', new_recommendation_path(session['user_id']) %>
+<%= link_to 'Public recommendations', public_recommendations_path(session['user_id']) %>
 
 <h2>RECOMMENDATIONS RECEIVED</h2>
 <div>
@@ -16,14 +17,14 @@
 		</thead>
 
 		<tbody>
-		<% @recommendations.each do |rec| %>
+		<% @recommendations_received.each do |rec| %>
 			<tr>
-				<td><%= User.find(rec.user_id).email %></td>
+				<td><%= rec.user_id %></td>
 				<td><%= rec.social_media %></td>
 				<td>@<%= rec.handle %></td>
 				<td><%= link_to 'View', rec %>
-					<%= link_to 'Delete', rec, method: :delete, data: {confirm: "Are you sure?"} %>
-					<%= link_to 'Edit', edit_recommendation_path(rec) %></td>
+						<%= link_to 'Delete', rec, method: :delete, data: {confirm: "Are you sure?"} %>
+						<%= link_to 'Edit', edit_recommendation_path(rec) %></td>
 			</tr>
 		<% end %>
 		</tbody>
@@ -44,9 +45,9 @@
 			</thead>
 
 			<tbody>
-			<% @recommendations.each do |rec| %>
+			<% @recommendations_sent.each do |rec| %>
 				<tr>
-					<td><%= User.find(rec.user_id_to).email %></td>
+					<td><%= rec.user_id_to %></td>
 					<td><%= rec.social_media %></td>
 					<td>@<%= rec.handle %></td>
 					<td><%= link_to 'View', rec %>

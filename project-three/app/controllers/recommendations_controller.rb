@@ -1,8 +1,14 @@
 class RecommendationsController < ApplicationController
 
   def index
-		@user = User.where(id: session['user_id']).first
-		@recommendations = Recommendation.where(user_id_to: session['user_id'])
+		# @user = User.find(id:session['user_id'])
+		@recommendations_received = Recommendation.where(user_id_to: session['user_id'], is_public: false)
+		@recommendations_sent     = Recommendation.where(user_id: session['user_id'], is_public: false)
+		# @recommendations_public   = Recommendation.where(user_id: session['user_id'], is_public: true)
+	end
+
+	def public
+		@recommendations_public = Recommendation.where(user_id: session['user_id'], is_public: true)
 	end
 
 	def new
@@ -14,7 +20,7 @@ class RecommendationsController < ApplicationController
 		if @recommendation.save && @recommendation.is_public == false
 			redirect_to user_path(session['user_id'])
 		elsif @recommendation.save && @recommendation.is_public == true
-			redirect_to recommendation_path(session['user_id'])
+			redirect_to recommendations_path(session['user_id'])
 		else
 			render 'new'
 		end

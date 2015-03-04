@@ -1,4 +1,4 @@
-<h1><%= @user.first_name.capitalize %>'s Recommendations!</h1>
+<h1>'s Recommendations!</h1>
 
 <h2>RECOMMENDATIONS</h2>
 <div>
@@ -16,7 +16,7 @@
 		<tbody>
 		<% @recommendations_public.each do |rec| %>
 			<tr>
-				<td><%= rec.user_id %></td>
+				<td><%#= rec.user_first_name %></td>
 				<td><%= rec.social_media %></td>
 				<td>@<%= rec.handle %></td>
 				<td><%= link_to 'View', rec %>
