@@ -23,7 +23,8 @@
 		Now enter the handle you want to recommend:<br>
 			@<%= f.text_field :handle %><br>
 
-		<%= fch %>
+		<%= f.check_box :is_public %>
+		<%= f.collection_select :user_id_to, User.all, :id, :name, include_blank: '' %><br>
 
 		<%= f.submit %>
 	<% end %>
