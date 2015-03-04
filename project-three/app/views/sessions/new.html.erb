@@ -1,14 +1,23 @@
-<div class="row">
-	<div class="col-md-12 text-center"></div>
-</div>
 
-<div class="ruby-form">
-	<%= form_for @user, url: { controller: 'sessions', action: 'create' } do |f| %>
-		<%= f.text_field :email, 				placeholder: 'EMAIL' %><br>
-		<%= f.password_field :password, placeholder: 'PASSWORD' %><br><br>
 
-		<%= f.submit 'Log In' %>
-	<% end %>
+	<div class="background-image">
+	</div>
+	<div class="container">
+		<div class="signin"><strong>Sign In</strong>
+			<div class="row">
+				<div class="col-md-12 text-center"></div>
+			</div>
 
-	<%= link_to 'Create a new user!', new_user_path %>
-</div>
+			<div class="ruby-form">
+				<%= form_for @user, url: { controller: 'sessions', action: 'create' } do |f| %>
+					<%= f.text_field :email, 				placeholder: 'EMAIL' %><br>
+					<%= f.password_field :password, placeholder: 'PASSWORD' %><br><br>
+
+					<%= f.submit 'Log In' %>
+
+				<% end %>
+				<br />
+				<%= link_to 'Create a new user!', new_user_path %>
+			</div>
+		</div>
+	</div>
