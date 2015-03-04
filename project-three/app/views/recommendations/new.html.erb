@@ -2,26 +2,28 @@
 	<div class="col-md-12 text-center"><h1 class="heading">Make a new recommendation!</h1></div>
 </div>
 
-<% if @user.errors.any? %>
+<% if @recommendation.errors.any? %>
 	<div id="error-explanation">
 		Try again, dum dum!<br>
-		<% @user.errors.full_messages.each do |msg| %>
+		<% @recommendation.errors.full_messages.each do |msg| %>
 			<%= msg %><br>
 		<% end %>
 	</div>
 <% end %>
 
 <div>
-	<%= form_for @user do |f| %>
-		<%= radio_button_tag(:age, "child") %>
-		<%= label_tag(:age_child, "I am younger than 21") %>
-		<%= radio_button_tag(:age, "adult") %>
-		<%= label_tag(:age_adult, "I'm over 21") %>
+	<%= form_for @recommendation do |f| %>
+		<%= f.collection_select :user_id, User.all, :id, :name, include_blank: 'User' %><br>
 
-		<input id="age_child" name="age" type="radio" value="child" />
-		<label for="age_child">I am younger than 21</label>
-		<input id="age_adult" name="age" type="radio" value="adult" />
-		<label for="age_adult">I'm over 21</label>
+		First choose TWITTER or INSTAGRAM: <br>
+			<%= f.radio_button_tag(:social_media, 'twitter') %>
+			<%= label_tag('Twitter') %>
+			<%= f.radio_button_tag(:social_media, 'instagram') %>
+			<%= label_tag('Instagram') %><br><br>
+		Now enter the handle you want to recommend:<br>
+			@<%= f.text_field :handle %><br>
+
+		<%= fch %>
 
 		<%= f.submit %>
 	<% end %>
