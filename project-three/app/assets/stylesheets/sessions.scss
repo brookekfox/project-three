@@ -13,7 +13,7 @@ b, strong {
 	left: 0;
 	right: 0;
 	z-index: -1;
-	background: url('http://i.huffpost.com/gen/2043270/thumbs/o-GROUP-ON-MOBILE-PHONES-facebook.jpg');
+	background-image: url(image_path('bg-1.jpg'));
 	width: 100%;
 	height: 100%;
 	background-color: black;
@@ -21,19 +21,17 @@ b, strong {
 	display: block;
 	text-align: center;
 
-	-webkit-filter: blur(2px);
-	-moz-filter: blur(2px);
-	-o-filter: blur(2px);
-	-ms-filter: blur(2px);
-	filter: blur(2px);
+	-webkit-filter: blur(1px);
+	-moz-filter: blur(1px);
+	-o-filter: blur(1px);
+	-ms-filter: blur(1px);
+	filter: blur(1px);
 
 }
 
 .container {
 	position: relative;
 	margin: auto;
-	left: 50px;
-	right: 50px;
 	padding-top: 50px;
 	width:	370px;
 	height: 315px;
