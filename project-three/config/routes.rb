@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
   resources :users, :recommendations
+	get 'recommendations/public' => 'recommendations#public', as: 'public_recommendations'
+
 	resource :sessions, only: [:new, :create, :destroy]
 
-	scope 'public' do
-		resources :recommendations, :as => 'public_recommendations'
-	end
+	# scope 'public' do
+	# 	resources :recommendations, :as => 'public_recommendations'
+	# end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

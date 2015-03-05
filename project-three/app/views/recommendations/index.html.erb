@@ -17,7 +17,7 @@
 		</thead>
 
 		<tbody>
-		<% @recommendations_received.each do |rec| %>
+		<% @recommendations.where(is_public: false, user_id_to:session['user_id']).each do |rec| %>
 			<tr>
 				<td><%= rec.user_id %></td>
 				<td><%= rec.social_media %></td>
@@ -45,7 +45,7 @@
 			</thead>
 
 			<tbody>
-			<% @recommendations_sent.each do |rec| %>
+			<% @recommendations.where(is_public: false, user_id:session['user_id']).each do |rec| %>
 				<tr>
 					<td><%= rec.user_id_to %></td>
 					<td><%= rec.social_media %></td>

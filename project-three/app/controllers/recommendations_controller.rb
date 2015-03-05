@@ -1,14 +1,17 @@
 class RecommendationsController < ApplicationController
 
   def index
-		# @user = User.find(id:session['user_id'])
-		@recommendations_received = Recommendation.where(user_id_to: session['user_id'], is_public: false)
-		@recommendations_sent     = Recommendation.where(user_id: session['user_id'], is_public: false)
+		@user = User.find(id:session['user_id'])
+		@recommendations = Recommendation.all
+		# @recommendations_received = Recommendation.where(user_id_to: session['user_id'], is_public: false)
+		# @recommendations_sent     = Recommendation.where(user_id: session['user_id'], is_public: false)
 		# @recommendations_public   = Recommendation.where(user_id: session['user_id'], is_public: true)
 	end
 
 	def public
-		@recommendations_public = Recommendation.where(user_id: session['user_id'], is_public: true)
+		@user = User.find(id:session['user_id'])
+		# @recommendations = Recommendation.where(user_id: session['user_id'], is_public: true)
+		@recommendations = Recommendation.all
 	end
 
 	def new
@@ -27,7 +30,10 @@ class RecommendationsController < ApplicationController
 	end
 
   def show
-		@recommendation = Recommendation.find(params[:id])
+		# @recommendation = Recommendation.find(params[:id])
+		# @user = User.find(id:session['user_id'])
+		# @recommendations = Recommendation.where(user_id: session['user_id'], is_public: true)
+		@recommendations = Recommendation.all
   end
 
   def edit
@@ -46,7 +52,7 @@ class RecommendationsController < ApplicationController
 	def destroy
 		@recommendation = Recommendation.find(params[:id])
 		@recommendation.destroy
-		redirect_to recommendation_path
+		redirect_to recommendations_path
 	end
 
 	private
