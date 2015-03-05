@@ -24,9 +24,11 @@
 		Now enter the handle you want to recommend:<br>
 		@<%= f.text_field :handle %><br><br>
 
-		Public? <%= f.check_box :is_public %><br>
-		If it's a not a public recommendation, to whom do you want to send it?<br>
-		<%= f.collection_select :user_id_to, User.where.not(id:session['user_id']), :id, :email, include_blank: '' %><br><br>
+		Private? <%= f.check_box :is_public, class: 'private_checkbox' %><br>
+		<div class="private_recommendation">
+			To whom do you want to send it?<br>
+			<%= f.collection_select :user_id_to, User.where.not(id:session['user_id']), :id, :email, include_blank: '' %>
+		</div>
 
 		Add some tags!
 		<table>

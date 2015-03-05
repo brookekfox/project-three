@@ -2,9 +2,6 @@ class RecommendationsController < ApplicationController
 
   def index
 		@recommendations = Recommendation.all
-		# @recommendations_received = Recommendation.where(user_id_to: session['user_id'], is_public: false)
-		# @recommendations_sent     = Recommendation.where(user_id: session['user_id'], is_public: false)
-		# @recommendations_public   = Recommendation.where(user_id: session['user_id'], is_public: true)
 	end
 
 	def public
@@ -18,7 +15,7 @@ class RecommendationsController < ApplicationController
 	def create
 		@recommendation = Recommendation.create(recommendation_params)
 		if @recommendation.save && @recommendation.is_public == false
-			redirect_to user_path(session['user_id'])
+			redirect_to recommendations_path(session['user_id'])
 		elsif @recommendation.save && @recommendation.is_public == true
 			redirect_to recommendations_path(session['user_id'])
 		else
@@ -27,10 +24,7 @@ class RecommendationsController < ApplicationController
 	end
 
   def show
-		# @recommendation = Recommendation.find(params[:id])
-		# @user = User.find(id:session['user_id'])
-		# @recommendations = Recommendation.where(user_id: session['user_id'], is_public: true)
-		@recommendations = Recommendation.all
+		@recommendation = Recommendation.find(params[:id])
   end
 
   def edit
@@ -40,7 +34,7 @@ class RecommendationsController < ApplicationController
 	def update
 		@recommendation = Recommendation.find(params[:id])
 		if @recommendation.update_attributes(recommendation_params)
-			redirect_to user_path(session['user_id'])
+			redirect_to recommendations_path(session['user_id'])
 		else
 			render 'edit'
 		end

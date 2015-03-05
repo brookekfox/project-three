@@ -1,33 +1,9 @@
-<h1><%= @user.email %>'s Recommendations!</h1>
+<div style="margin:0 auto; width:60%; border:4px double black; padding:2%; border-radius:10px">
+	<div>
+		<h1>@<%= @recommendation.handle %></h1>
+		<h3>Sent to <%= @recommendation.user_id_to %> from <%= @recommendation.user.email %></h3>
+	</div>
 
-<%= link_to 'User page', recommendations_path %>
-
-<h2>RECOMMENDATIONS</h2>
-<div>
-	<table>
-		<thead>
-		<tr>
-			<!--<th>FROM</th>-->
-			<th>SOCIAL MEDIA</th>
-			<th>HANDLE</th>
-			<th>TAGS</th>
-			<th>ACTIONS</th>
-			<th colspan="4"></th>
-		</tr>
-		</thead>
-
-		<tbody>
-		<% @recommendations.where(is_public:true, user_id:session['user_id']).each do |rec| %>
-			<tr>
-				<td><%= rec.user.first_name %></td>
-				<td><%= rec.social_media %></td>
-				<td>@<%= rec.handle %></td>
-				<td></td>
-				<td><%= link_to 'View', rec %>
-						<%= link_to 'Delete', rec, method: :delete, data: {confirm: "Are you sure?"} %>
-						<%= link_to 'Edit', edit_recommendation_path(rec) %></td>
-			</tr>
-		<% end %>
-		</tbody>
-	</table>
+	<%= link_to 'User page', recommendations_path %><br>
+	<%= link_to 'Public recommendations', public_recommendations_path(session['user_id']) %>
 </div>

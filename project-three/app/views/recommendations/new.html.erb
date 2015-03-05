@@ -13,7 +13,7 @@
 
 <div>
 	<%= form_for @recommendation do |f| %>
-		<%#= f.collection_select :user_id, User.all, :id, :email, include_blank: 'User' %><br>
+		<%#= f.collection_select :user_id, User.all, :id, :email, include_blank: 'User' %>
 		<%= f.hidden_field :user_id, value:session['user_id'] %>
 
 		First choose TWITTER or INSTAGRAM: <br>
@@ -25,12 +25,13 @@
 		Now enter the handle you want to recommend:<br>
 			@<%= f.text_field :handle %><br><br>
 
-		Private? <%= f.check_box :is_public, :class => "store_checkbox" %><br>
+		Private? <%= f.check_box :is_public, class: 'private_checkbox' %><br>
 		<div class="private_recommendation">
 			To whom do you want to send it?<br>
 			<%= f.collection_select :user_id_to, User.where.not(id:session['user_id']), :id, :email, include_blank: '' %>
 		</div>
 
+		<br>
 		Add some tags!
 		<table>
 			<tr><td>Blog</td><td><%= f.check_box :is_blog %></td></tr>
