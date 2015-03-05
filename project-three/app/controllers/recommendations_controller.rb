@@ -1,7 +1,6 @@
 class RecommendationsController < ApplicationController
 
   def index
-		@user = User.find(id:session['user_id'])
 		@recommendations = Recommendation.all
 		# @recommendations_received = Recommendation.where(user_id_to: session['user_id'], is_public: false)
 		# @recommendations_sent     = Recommendation.where(user_id: session['user_id'], is_public: false)
@@ -9,8 +8,6 @@ class RecommendationsController < ApplicationController
 	end
 
 	def public
-		@user = User.find(id:session['user_id'])
-		# @recommendations = Recommendation.where(user_id: session['user_id'], is_public: true)
 		@recommendations = Recommendation.all
 	end
 

@@ -17,34 +17,37 @@
 		<%= f.hidden_field :user_id, value:session['user_id'] %>
 
 		First choose TWITTER or INSTAGRAM: <br>
-			<%= f.radio_button(:social_media, 'twitter') %>
+			<%= f.radio_button(:social_media, 'Twitter') %>
 			<%= f.label(:social_media, 'Twitter') %>
-			<%= f.radio_button(:social_media, 'instagram') %>
+			<%= f.radio_button(:social_media, 'Instagram') %>
 			<%= f.label(:social_media, 'Instagram') %><br><br>
 
 		Now enter the handle you want to recommend:<br>
 			@<%= f.text_field :handle %><br><br>
 
-		Public? <%= f.check_box :is_public %><br>
-		If it's a not a public recommendation, to whom do you want to send it?<br>
-			<%= f.collection_select :user_id_to, User.where.not(id:session['user_id']), :id, :email, include_blank: '' %><br><br>
+		Private? <%= f.check_box :is_public, :class => "store_checkbox" %><br>
+		<div class="private_recommendation">
+			To whom do you want to send it?<br>
+			<%= f.collection_select :user_id_to, User.where.not(id:session['user_id']), :id, :email, include_blank: '' %>
+		</div>
 
 		Add some tags!
-			Blog <%= f.check_box :is_blog %>
-			Fashion <%= f.check_box :is_fashion %>
-			Film <%= f.check_box :is_film %>
-			Food <%= f.check_box :is_food %>
-			Funny <%= f.check_box :is_funny %>
-			Music <%= f.check_box :is_music %>
-			News <%= f.check_box :is_news %>
-			Sports <%= f.check_box :is_sports %>
-			TV <%= f.check_box :is_tv %>
-		<br><br>
+		<table>
+			<tr><td>Blog</td><td><%= f.check_box :is_blog %></td></tr>
+			<tr><td>Fashion</td><td><%= f.check_box :is_fashion %></td></tr>
+			<tr><td>Film</td><td><%= f.check_box :is_film %></td></tr>
+			<tr><td>Food</td><td><%= f.check_box :is_food %></td></tr>
+			<tr><td>Funny</td><td><%= f.check_box :is_funny %></td></tr>
+			<tr><td>Music</td><td><%= f.check_box :is_music %></td></tr>
+			<tr><td>News</td><td><%= f.check_box :is_news %></td></tr>
+			<tr><td>Sports</td><td><%= f.check_box :is_sports %></td></tr>
+			<tr><td>TV</td><td><%= f.check_box :is_tv %></td></tr>
+		</table>
 
 
 		<%= f.submit %>
 	<% end %>
 
-	<%= link_to 'Cancel', user_path(session['user_id']) %>
+	<%= link_to 'Cancel', recommendations_path(session['user_id']) %>
 </div>
 

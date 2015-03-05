@@ -2,7 +2,7 @@ require 'bcrypt'
 
 class User < ActiveRecord::Base
 	has_secure_password
-	has_many :recommendations
+	has_many :recommendation
 
 	validates :email, presence: true,
 					 				  format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,

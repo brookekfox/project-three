@@ -19,12 +19,11 @@
 		<tbody>
 		<% @recommendations.where(is_public: false, user_id_to:session['user_id']).each do |rec| %>
 			<tr>
-				<td><%= rec.user_id %></td>
+				<td><%= rec.user.email %></td>
 				<td><%= rec.social_media %></td>
 				<td>@<%= rec.handle %></td>
 				<td><%= link_to 'View', rec %>
-						<%= link_to 'Delete', rec, method: :delete, data: {confirm: "Are you sure?"} %>
-						<%= link_to 'Edit', edit_recommendation_path(rec) %></td>
+						<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %></td>
 			</tr>
 		<% end %>
 		</tbody>
@@ -47,7 +46,7 @@
 			<tbody>
 			<% @recommendations.where(is_public: false, user_id:session['user_id']).each do |rec| %>
 				<tr>
-					<td><%= rec.user_id_to %></td>
+					<td><%= User.find(rec.user_id_to).email %></td>
 					<td><%= rec.social_media %></td>
 					<td>@<%= rec.handle %></td>
 					<td><%= link_to 'View', rec %>
