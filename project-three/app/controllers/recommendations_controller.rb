@@ -17,6 +17,7 @@ class RecommendationsController < ApplicationController
 
 		@base_url            = 'https://api.instagram.com/v1/users/'
 		@search_access_token = 'search?access_token=' + ENV['INSTAGRAM_API_KEY'] + '&q='
+		#@query
 		@photo_access_token  = '/media/recent?access_token=' + ENV['INSTAGRAM_API_KEY']
 		@count               = '&count=1'
 	end
