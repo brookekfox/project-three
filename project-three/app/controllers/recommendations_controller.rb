@@ -6,6 +6,7 @@ class RecommendationsController < ApplicationController
 
 	def public
 		@recommendations = Recommendation.all
+		@user = User.find(params[:id])
 	end
 
 	def new
@@ -14,9 +15,9 @@ class RecommendationsController < ApplicationController
 
 	def create
 		@recommendation = Recommendation.create(recommendation_params)
-		if @recommendation.save && @recommendation.is_public == false
+		if @recommendation.save && @recommendation.is_private == false
 			redirect_to recommendations_path(session['user_id'])
-		elsif @recommendation.save && @recommendation.is_public == true
+		elsif @recommendation.save && @recommendation.is_private == true
 			redirect_to recommendations_path(session['user_id'])
 		else
 			render 'new'
@@ -48,7 +49,7 @@ class RecommendationsController < ApplicationController
 
 	private
 		def recommendation_params
-			params.require(:recommendation).permit(:social_media, :is_public, :handle, :user_id_to, :user_id, :is_funny, :is_food, :is_news, :is_fashion, :is_sports, :is_tv, :is_film, :is_music, :is_blog)
+			params.require(:recommendation).permit(:social_media, :is_private, :handle, :user_id_to, :user_id, :is_funny, :is_food, :is_news, :is_fashion, :is_sports, :is_tv, :is_film, :is_music, :is_blog)
 		end
 
 end
