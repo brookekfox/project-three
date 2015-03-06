@@ -22,12 +22,17 @@
 			</thead>
 
 			<tbody>
-			<%# @recommendations.where(is_private:false, user_id:session['user_id']).each do |rec| %>
 			<% @recommendations.each do |rec| %>
 				<tr>
 					<!--<td><%#= rec.user.email %></td>-->
 					<td><%= rec.social_media %></td>
-					<td>@<%= rec.handle %></td>
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= link_to "@#{rec.handle}", "http://instagram.com/#{rec.handle}" %>
+						<% end %>
+					</td>
 					<td></td>
 					<td class="actions-for-current-user">
 						<%= link_to 'View', rec %>

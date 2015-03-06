@@ -24,7 +24,13 @@
 				<tr>
 					<td><%= rec.user.email %></td>
 					<td><%= rec.social_media %></td>
-					<td>@<%= rec.handle %></td>
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= link_to "@#{rec.handle}", "http://instagram.com/#{rec.handle}" %>
+						<% end %>
+					</td>
 					<td><%= link_to 'View', rec %>
 							<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %></td>
 				</tr>
@@ -51,7 +57,13 @@
 					<tr>
 						<td><%= rec.user_id_to %></td>
 						<td><%= rec.social_media %></td>
-						<td>@<%= rec.handle %></td>
+						<td>
+							<% if rec.social_media == 'Twitter' %>
+								<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
+							<% elsif rec.social_media == 'Instagram' %>
+								<%= link_to "@#{rec.handle}", "http://instagram.com/#{rec.handle}" %>
+							<% end %>
+						</td>
 						<td><%= link_to 'View', rec %>
 								<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %>
 								<%= link_to 'Edit', edit_recommendation_path(rec) %></td>
