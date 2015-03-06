@@ -15,10 +15,10 @@ class RecommendationsController < ApplicationController
 
 	def create
 		@recommendation = Recommendation.create(recommendation_params)
-		if @recommendation.save && @recommendation.is_private == false
+		if (@recommendation.save && @recommendation.is_private == true) || (@recommendation.save && @recommendation.is_private == false)
 			redirect_to recommendations_path(session['user_id'])
-		elsif @recommendation.save && @recommendation.is_private == true
-			redirect_to recommendations_path(session['user_id'])
+		# elsif @recommendation.save && @recommendation.is_private == false
+		# 	redirect_to recommendations_path(session['user_id'])
 		else
 			render 'new'
 		end
