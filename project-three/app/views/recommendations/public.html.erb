@@ -1,6 +1,6 @@
-<input type="hidden" id="SessionValue" value="<%= session['user_id'] %>">
+<input type="hidden" class="SessionValue" value="<%= session['user_id'] %>">
 <div style="margin:0 auto; width:60%; border:4px double black; padding:2%; border-radius:10px">
-	<h1><%= session['user_name'] %>'s Recommendations!</h1>
+	<h1><%= @user.first_name.capitalize %>'s Recommendations!</h1>
 
 	<%= link_to 'User page', recommendations_path %>
 
@@ -13,20 +13,20 @@
 				<th>SOCIAL MEDIA</th>
 				<th>HANDLE</th>
 				<th>TAGS</th>
-				<th>ACTIONS</th>
+				<th class="actions-for-current-user">ACTIONS</th>
 				<th colspan="4"></th>
 			</tr>
 			</thead>
 
 			<tbody>
-			<% @recommendations.where(is_public:true, user_id:session['user_id']).each do |rec| %>
+			<% @recommendations.where(is_private:false, user_id:session['user_id']).each do |rec| %>
 				<tr>
-					<td><%#= rec.user.email %></td>
+					<!--<td><%#= rec.user.email %></td>-->
 					<td><%= rec.social_media %></td>
 					<td>@<%= rec.handle %></td>
 					<td></td>
 					<td class="actions-for-current-user">
-						<%= link_to 'View', rec %>
+						<%#= link_to 'View', rec %>
 						<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %>
 						<%= link_to 'Edit', edit_recommendation_path(rec) %></td>
 				</tr>

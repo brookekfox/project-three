@@ -1,9 +1,11 @@
+<input type="hidden" class="SessionValue" value="<%= session['user_id'] %>">
 <div style="margin:0 auto; width:60%; border:4px double black; padding:2%; border-radius:10px">
 	<div>
 		<h1>@<%= @recommendation.handle %></h1>
 		<h3>Sent to <%= @recommendation.user_id_to %> from <%= @recommendation.user.email %></h3>
 	</div>
 
-	<%= link_to 'User page', recommendations_path %><br>
-	<%= link_to 'Public recommendations', public_recommendations_path(session['user_id']) %>
+	<div class="actions-for-current-user"><%= link_to 'User page', recommendations_path %></div>
+	<%= link_to "#{@recommendation.user_id_to}'s Public recommendations", public_recommendations_path(session['user_id']) %><br>
+	<%= link_to "#{@recommendation.user.email}'s Public recommendations", public_recommendations_path(session['user_id']) %>
 </div>

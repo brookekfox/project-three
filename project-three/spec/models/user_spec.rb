@@ -8,3 +8,4 @@ RSpec.describe User, type: :model do
 		expect(login_attempt).to eql(user)
 	end
 end
+
