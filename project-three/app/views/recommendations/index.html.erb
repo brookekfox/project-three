@@ -1,9 +1,9 @@
-<input type="hidden" id="SessionValue" value="<%= session['user_id'] %>">
+<input type="hidden" class="SessionValue" value="<%= session['user_id'] %>">
 <div style="margin:0 auto; width:60%; border:4px double black; padding:2%; border-radius:10px">
 	<h1>Recommendations!</h1>
 
 	<%= link_to 'Make a new recommendation', new_recommendation_path(session['user_id']) %><br>
-	<%= link_to 'Public recommendations', public_recommendations_path(session['user_id']) %><br>
+	<%= link_to 'My public recommendations', public_recommendations_path(session['user_id']) %><br>
 	<%= link_to 'Log out', sessions_path, method: :delete %>
 
 	<h2 class="actions-for-current-user">RECOMMENDATIONS RECEIVED</h2>

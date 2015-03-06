@@ -1,7 +1,7 @@
-<input type="hidden" id="SessionValue" value="<%= session['user_id'] %>">
+<input type="hidden" class="SessionValue" value="<%= session['user_id'] %>">
 
 <div style="margin:0 auto; width:20%; border:4px double deeppink; color:darkgreen; padding:2%; border-radius:10px">
-	<%= link_to 'My User page', recommendations_path %>
+	<%= link_to 'My user page', recommendations_path %>
 </div>
 
 <div style="margin:0 auto; width:60%; border:4px double black; padding:2%; border-radius:10px">
@@ -22,7 +22,8 @@
 			</thead>
 
 			<tbody>
-			<% @recommendations.where(is_private:false, user_id:session['user_id']).each do |rec| %>
+			<%# @recommendations.where(is_private:false, user_id:session['user_id']).each do |rec| %>
+			<% @recommendations.each do |rec| %>
 				<tr>
 					<!--<td><%#= rec.user.email %></td>-->
 					<td><%= rec.social_media %></td>

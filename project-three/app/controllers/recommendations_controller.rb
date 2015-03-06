@@ -5,7 +5,8 @@ class RecommendationsController < ApplicationController
 	end
 
 	def public
-		@recommendations = Recommendation.all
+		# @recommendations = Recommendation.all
+		@recommendations = Recommendation.all.where(user_id:params[:id])
 		@user = User.find(params[:id])
 	end
 
