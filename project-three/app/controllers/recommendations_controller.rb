@@ -3,12 +3,23 @@ class RecommendationsController < ApplicationController
   def index
 		@users = User.all
 		@recommendations = Recommendation.all
+
+		@base_url     = 'https://api.instagram.com/v1/users/search?'
+		@access_token = 'access_token=' + ENV['INSTAGRAM_API_KEY'] + '&q='
+		#@query
+		@count        = '&count=1'
 	end
 
 	def public
 		# @recommendations = Recommendation.all
 		@recommendations = Recommendation.all.where(user_id:params[:id])
 		@user = User.find(params[:id])
+
+		@base_url     = 'https://api.instagram.com/v1/users/search?'
+		@access_token = 'access_token=' + ENV['INSTAGRAM_API_KEY'] + '&q='
+		#@query
+		@count        = '&count=1'
+
 	end
 
 	def new

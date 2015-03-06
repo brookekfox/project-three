@@ -21,7 +21,7 @@
 			</thead>
 
 			<tbody>
-			<% @recommendations.sort_by { |r| r[:handle] }.each do |rec| %>
+			<% @recommendations.sort_by { |r| r[:social_media] }.each do |rec| %>
 				<tr>
 					<!--<td><%#= rec.social_media %></td>-->
 					<td>
@@ -36,6 +36,15 @@
 							<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
 						<% elsif rec.social_media == 'Instagram' %>
 							<%= link_to "@#{rec.handle}", "http://instagram.com/#{rec.handle}" %>
+						<% end %>
+					</td>
+					<td>
+						<% if rec.social_media == 'Instagram' %>
+							<% @query = rec.handle %>
+							<% prof_pic = HTTParty.get(@base_url+@access_token+@query+@count)['data'][0]['profile_picture'] %>
+							<%= image_tag prof_pic %>
+							<%# elsif rec.social_media == 'Twitter' %>
+							<%#= rec.handle %>
 						<% end %>
 					</td>
 					<td></td>
