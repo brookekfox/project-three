@@ -15,11 +15,10 @@ class RecommendationsController < ApplicationController
 		@recommendations = Recommendation.all.where(user_id:params[:id])
 		@user = User.find(params[:id])
 
-		@base_url     = 'https://api.instagram.com/v1/users/search?'
-		@access_token = 'access_token=' + ENV['INSTAGRAM_API_KEY'] + '&q='
-		#@query
-		@count        = '&count=1'
-
+		@base_url            = 'https://api.instagram.com/v1/users/'
+		@search_access_token = 'search?access_token=' + ENV['INSTAGRAM_API_KEY'] + '&q='
+		@photo_access_token  = '/media/recent?access_token=' + ENV['INSTAGRAM_API_KEY']
+		@count               = '&count=1'
 	end
 
 	def new

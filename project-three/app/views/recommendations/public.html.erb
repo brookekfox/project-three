@@ -41,13 +41,20 @@
 					<td>
 						<% if rec.social_media == 'Instagram' %>
 							<% @query = rec.handle %>
-							<% prof_pic = HTTParty.get(@base_url+@access_token+@query+@count)['data'][0]['profile_picture'] %>
+							<% prof_pic = HTTParty.get(@base_url+@search_access_token+@query+@count)['data'][0]['profile_picture'] %>
 							<%= image_tag prof_pic %>
 							<%# elsif rec.social_media == 'Twitter' %>
 							<%#= rec.handle %>
 						<% end %>
 					</td>
-					<td></td>
+					<td>
+						<% if rec.social_media == 'Instagram' %>
+							<% @query = rec.handle %>
+							<% @insta_user_id = HTTParty.get(@base_url+@search_access_token+@query+@count)['data'][0]['id'].to_s %>
+							<% most_recent_photo = HTTParty.get(@base_url+@insta_user_id+@photo_access_token+@count)['data'][0]['images']['thumbnail']['url'] %>
+							<%= image_tag most_recent_photo %>
+						<% end %>
+					</td>
 					<!--<td class="actions-for-current-user">-->
 						<!--<%#= link_to 'View', rec %>-->
 						<!--<%#= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %>-->
