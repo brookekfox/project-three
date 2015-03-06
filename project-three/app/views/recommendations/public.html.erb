@@ -12,20 +12,25 @@
 		<table>
 			<thead>
 			<tr>
-				<!--<th>FROM</th>-->
-				<th>SOCIAL MEDIA</th>
-				<th>HANDLE</th>
-				<th>TAGS</th>
-				<th>ACTIONS</th>
-				<th colspan="4"></th>
+				<!--<th>SOCIAL MEDIA</th>-->
+				<!--<th>HANDLE</th>-->
+				<!--<th>TAGS</th>-->
+				<!--<th>ACTIONS</th>-->
+				<!--<th colspan="4"></th>-->
 			</tr>
 			</thead>
 
 			<tbody>
-			<% @recommendations.each do |rec| %>
+			<% @recommendations.sort_by { |r| r[:handle] }.each do |rec| %>
 				<tr>
-					<!--<td><%#= rec.user.email %></td>-->
-					<td><%= rec.social_media %></td>
+					<!--<td><%#= rec.social_media %></td>-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= image_tag('twitter.png') %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= image_tag('instagram.png') %>
+						<% end %>
+					</td>
 					<td>
 						<% if rec.social_media == 'Twitter' %>
 							<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
@@ -34,10 +39,11 @@
 						<% end %>
 					</td>
 					<td></td>
-					<td class="actions-for-current-user">
-						<%= link_to 'View', rec %>
-						<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %>
-						<%= link_to 'Edit', edit_recommendation_path(rec) %></td>
+					<!--<td class="actions-for-current-user">-->
+						<!--<%#= link_to 'View', rec %>-->
+						<!--<%#= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %>-->
+						<!--<%#= link_to 'Edit', edit_recommendation_path(rec) %>-->
+					<!--</td>-->
 				</tr>
 			<% end %>
 			</tbody>

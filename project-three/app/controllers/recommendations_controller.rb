@@ -1,6 +1,7 @@
 class RecommendationsController < ApplicationController
 
   def index
+		@users = User.all
 		@recommendations = Recommendation.all
 	end
 

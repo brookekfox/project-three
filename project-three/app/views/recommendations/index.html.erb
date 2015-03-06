@@ -14,16 +14,29 @@
 				<th>FROM</th>
 				<th>SOCIAL MEDIA</th>
 				<th>HANDLE</th>
+				<th>DATE</th>
 				<th>TAGS</th>
-				<th colspan="4"></th>
+				<th>ACTIONS</th>
+				<th colspan="6"></th>
 			</tr>
 			</thead>
 
 			<tbody>
-			<% @recommendations.where(is_private:true, user_id_to:session['user_id']).each do |rec| %>
+			<% @recommendations.where(is_private:true, user_id_to:session['user_id'])
+												 .sort_by { |r| r[:user_id] }
+						 						 .each do |rec| %>
 				<tr>
-					<td><%= rec.user.email %></td>
-					<td><%= rec.social_media %></td>
+					<td><%= rec.user.first_name.capitalize %>
+						<span style="font-size:x-small;font-style:italic"> <%= rec.user.email %> </span>
+					</td>
+					<!--<td><%#= rec.social_media %></td>-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= image_tag('twitter.png') %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= image_tag('instagram.png') %>
+						<% end %>
+					</td>
 					<td>
 						<% if rec.social_media == 'Twitter' %>
 							<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
@@ -31,6 +44,8 @@
 							<%= link_to "@#{rec.handle}", "http://instagram.com/#{rec.handle}" %>
 						<% end %>
 					</td>
+					<td><%= rec.created_at.to_date.strftime("%a %B %d, %Y") %></td>
+					<td></td>
 					<td><%= link_to 'View', rec %>
 							<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %></td>
 				</tr>
@@ -53,10 +68,22 @@
 				</thead>
 
 				<tbody>
-				<% @recommendations.where(is_private:true, user_id:session['user_id']).where.not(user_id_to:nil).each do |rec| %>
+				<% @recommendations.where(is_private:true, user_id:session['user_id'])
+							 						 .where.not(user_id_to:nil)
+							 						 .sort_by { |r| r[:user_id_to] }
+							 					   .each do |rec| %>
 					<tr>
-						<td><%= rec.user_id_to %></td>
-						<td><%= rec.social_media %></td>
+						<td><%= @users.find(rec.user_id_to).first_name.capitalize %>
+							<span style="font-size:x-small;font-style:italic"><%= @users.find(rec.user_id_to).email %></span>
+						</td>
+						<!--<td><%#= rec.social_media %></td>-->
+						<td>
+							<% if rec.social_media == 'Twitter' %>
+								<%= image_tag('twitter.png') %>
+							<% elsif rec.social_media == 'Instagram' %>
+								<%= image_tag('instagram.png') %>
+							<% end %>
+						</td>
 						<td>
 							<% if rec.social_media == 'Twitter' %>
 								<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
