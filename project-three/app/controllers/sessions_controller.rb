@@ -8,9 +8,10 @@ class SessionsController < ApplicationController
 		if user != nil && user.authenticate(params[:user][:password])
 			session['user_id']   = user.id.to_s
 			session['user_type'] = 'logged-in'
-			session['user_name'] = user.first_name.capitalize!
+			session['user_name'] = user.first_name
 			@current_user = User.find(session['user_id'])
-			redirect_to user_path(session['user_id'])
+			# redirect_to user_path(session['user_id'])
+			redirect_to recommendations_path
 		else
 			redirect_to new_sessions_path
 		end

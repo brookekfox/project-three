@@ -3,7 +3,7 @@
 	<h1>Recommendations!</h1>
 
 	<%= link_to 'Make a new recommendation', new_recommendation_path(session['user_id']) %><br>
-	<%= link_to 'Public recommendations', public_recommendations_path(session['user_id']) %><br>
+	<%= link_to 'My public recommendations', public_recommendations_path(session['user_id']) %><br>
 	<%= link_to 'Log out', sessions_path, method: :delete %>
 
 	<h2 class="actions-for-current-user">RECOMMENDATIONS RECEIVED</h2>
@@ -14,17 +14,39 @@
 				<th>FROM</th>
 				<th>SOCIAL MEDIA</th>
 				<th>HANDLE</th>
+				<th>PROFILE PICTURE</th>
+				<th>DATE</th>
 				<th>TAGS</th>
-				<th colspan="4"></th>
+				<th>ACTIONS</th>
+				<th colspan="6"></th>
 			</tr>
 			</thead>
 
 			<tbody>
-			<% @recommendations.where(is_private:true, user_id_to:session['user_id']).each do |rec| %>
+			<% @recommendations.where(is_private:true, user_id_to:session['user_id'])
+												 .sort_by { |r| r[:user_id] }
+						 						 .each do |rec| %>
 				<tr>
-					<td><%= rec.user.email %></td>
-					<td><%= rec.social_media %></td>
-					<td>@<%= rec.handle %></td>
+					<td><%= rec.user.first_name.capitalize %><br>
+						<span style="font-size:x-small;font-style:italic"> <%= rec.user.email %> </span>
+					</td>
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= image_tag('twitter.png') %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= image_tag('instagram.png') %>
+						<% end %>
+					</td>
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= link_to "@#{rec.handle}", "http://instagram.com/#{rec.handle}" %>
+						<% end %>
+					</td>
+					<td></td>
+					<td><%= rec.created_at.to_date.strftime("%a %B %d, %Y") %></td>
+					<td></td>
 					<td><%= link_to 'View', rec %>
 							<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %></td>
 				</tr>
@@ -41,17 +63,46 @@
 					<th>TO</th>
 					<th>SOCIAL MEDIA</th>
 					<th>HANDLE</th>
+					<th>PROFILE PICTURE</th>
 					<th>TAGS</th>
 					<th colspan="4"></th>
 				</tr>
 				</thead>
 
 				<tbody>
-				<% @recommendations.where(is_private:true, user_id:session['user_id']).where.not(user_id_to:nil).each do |rec| %>
+				<% @recommendations.where(is_private:true, user_id:session['user_id'])
+							 						 .where.not(user_id_to:nil)
+							 						 .sort_by { |r| r[:user_id_to] }
+							 					   .each do |rec| %>
 					<tr>
-						<td> <%= rec.user_id_to %></td>
-						<td> <%= rec.social_media %></td>
-						<td>@<%= rec.handle %></td>
+						<td><%= @users.find(rec.user_id_to).first_name.capitalize %><br>
+							<span style="font-size:x-small;font-style:italic"><%= @users.find(rec.user_id_to).email %></span>
+						</td>
+						<!--<td><%#= rec.social_media %></td>-->
+						<td>
+							<% if rec.social_media == 'Twitter' %>
+								<%= image_tag('twitter.png') %>
+							<% elsif rec.social_media == 'Instagram' %>
+								<%= image_tag('instagram.png') %>
+							<% end %>
+						</td>
+						<td>
+							<% if rec.social_media == 'Twitter' %>
+								<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
+							<% elsif rec.social_media == 'Instagram' %>
+								<%= link_to "@#{rec.handle}", "http://instagram.com/#{rec.handle}" %>
+							<% end %>
+						</td>
+						<td>
+							<% if rec.social_media == 'Instagram' %>
+								<% query = rec.handle %>
+								<% prof_pic = HTTParty.get(@base_url+@access_token+query+'&count=1')['data'][0]['profile_picture'] %>
+							<%= image_tag prof_pic %>
+							<%# elsif rec.social_media == 'Twitter' %>
+								<%#= rec.handle %>
+							<% end %>
+						</td>
+						<td></td>
 						<td><%= link_to 'View', rec %>
 								<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %>
 								<%= link_to 'Edit', edit_recommendation_path(rec) %></td>

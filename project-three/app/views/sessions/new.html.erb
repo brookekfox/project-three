@@ -4,7 +4,7 @@
 
 <div class="ruby-form">
 	<%= form_for @user, url: { controller: 'sessions', action: 'create' } do |f| %>
-		<%= f.text_field :email, 				placeholder: 'EMAIL' %><br>
+		<%= f.text_field :email, 				placeholder: 'EMAIL',   autofocus:true %><br>
 		<%= f.password_field :password, placeholder: 'PASSWORD' %><br><br>
 
 		<%= f.submit 'Log In' %>

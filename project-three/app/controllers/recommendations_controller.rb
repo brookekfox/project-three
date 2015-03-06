@@ -1,12 +1,25 @@
 class RecommendationsController < ApplicationController
 
   def index
+		@users = User.all
 		@recommendations = Recommendation.all
+
+		@base_url     = 'https://api.instagram.com/v1/users/search?'
+		@access_token = 'access_token=' + ENV['INSTAGRAM_API_KEY'] + '&q='
+		#@query
+		@count        = '&count=1'
 	end
 
 	def public
-		@recommendations = Recommendation.all
+		# @recommendations = Recommendation.all
+		@recommendations = Recommendation.all.where(user_id:params[:id])
 		@user = User.find(params[:id])
+
+		@base_url            = 'https://api.instagram.com/v1/users/'
+		@search_access_token = 'search?access_token=' + ENV['INSTAGRAM_API_KEY'] + '&q='
+		#@query
+		@photo_access_token  = '/media/recent?access_token=' + ENV['INSTAGRAM_API_KEY']
+		@count               = '&count=1'
 	end
 
 	def new
@@ -15,10 +28,10 @@ class RecommendationsController < ApplicationController
 
 	def create
 		@recommendation = Recommendation.create(recommendation_params)
-		if @recommendation.save && @recommendation.is_private == false
+		if (@recommendation.save && @recommendation.is_private == true) || (@recommendation.save && @recommendation.is_private == false)
 			redirect_to recommendations_path(session['user_id'])
-		elsif @recommendation.save && @recommendation.is_private == true
-			redirect_to recommendations_path(session['user_id'])
+		# elsif @recommendation.save && @recommendation.is_private == false
+		# 	redirect_to recommendations_path(session['user_id'])
 		else
 			render 'new'
 		end
