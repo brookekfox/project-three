@@ -41,10 +41,9 @@
 					<td>
 						<% if rec.social_media == 'Instagram' %>
 							<% query = rec.handle %>
-							<% profile_pic = HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['profile_picture'] %>
-							<%= image_tag profile_pic %>
-							<%# elsif rec.social_media == 'Twitter' %>
-							<%#= rec.handle %>
+							<%= image_tag HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['profile_picture'] %>
+						<% elsif rec.social_media == 'Twitter' %>
+							<%= image_tag $twitter.user(rec.handle).profile_image_uri(size=:bigger) %>
 						<% end %>
 					</td>
 					<td>
