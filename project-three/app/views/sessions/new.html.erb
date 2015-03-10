@@ -1,81 +1,95 @@
 
 <section class="module parallax parallax-1">
-    <div class="container">
-      <h1>Share.</h1>
-    </div>
+  <div class="container">
+    <h1>social Rec!</h1>
+  </div>
+</section>
+
+<section class="module content">
+  <div class="container">
+  <div class="ruby-form">
+    <%= form_for @user, url: { controller: 'sessions', action: 'create' } do |f| %>
+      <%= f.text_field :email,        placeholder: 'EMAIL',   autofocus:true %><br>
+      <%= f.password_field :password, placeholder: 'PASSWORD' %><br><br>
+
+      <%= f.submit 'Log In' %>
+    <% end %>
+  </div>
+  
+    <section class="content bgcolor-4">
+    <h2>Log in</h2>
+    <span class="input input--madoka">
+      <input class="input__field input__field--madoka" type="text" id="input-31" />
+      <label class="input__label input__label--madoka" for="input-31">
+        <svg class="graphic graphic--madoka" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+          <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
+        </svg>
+        <span class="input__label-content input__label-content--madoka">E-mail</span>
+      </label>
+    </span>
+    <span class="input input--madoka">
+      <input class="input__field input__field--madoka" type="text" id="input-32" />
+      <label class="input__label input__label--madoka" for="input-32">
+        <svg class="graphic graphic--madoka" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+          <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
+        </svg>
+        <span class="input__label-content input__label-content--madoka">Password</span>
+      </label>
+    </span>
   </section>
-
-  <section class="module content content-1">
-    <div class="sign-in">
-      <div class="ruby-form">
-		<%= form_for @user, url: { controller: 'sessions', action: 'create' } do |f| %>
-			<%= f.text_field :email, 				placeholder: 'EMAIL',   autofocus:true %><br>
-			<%= f.password_field :password, placeholder: 'PASSWORD' %><br><br>
-
-			<%= f.submit 'Log In' %>
-		<% end %>
-
-		<%= link_to 'Create a new user!', new_user_path %>
-	  </div>
-    </div>
-  </section>
-
-  <section class="module parallax parallax-2">
-    <div class="container">
-      <h1></h1>
-    </div>
-  </section>
-
-  <section class="module content">
-    <div class="container">
-      <h2>Lorem Ipsum Dolor</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil consequuntur, nesciunt dicta, esse rem ducimus itaque quis. Adipisci ullam nam qui illum debitis sit ad in delectus, repudiandae non dolorum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit veritatis, facere aliquid itaque tempore consequatur nihil sint enim aliquam id saepe magnam totam repellat placeat a fugit nulla molestias voluptas.
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta cum distinctio eum asperiores rem enim fugit eaque voluptas est laboriosam in repudiandae architecto placeat, illum atque quasi explicabo, culpa, molestias!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit voluptas, aperiam quae provident, recusandae rem quis. Ut quaerat, quasi iste voluptate et dolorem atque sed neque voluptates, molestias dolor enim!
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam odit tempore, quibusdam impedit deserunt. Natus quisquam, facilis numquam, molestias nesciunt modi, at debitis maxime sunt et quo quas labore perferendis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde delectus laborum doloremque recusandae, debitis maxime a! Nihil distinctio ex, cumque tempore ea voluptas omnis odit, quaerat natus nam excepturi corporis!
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque eius harum atque unde nihil aut quam provident sunt, iste error vitae suscipit dolores cupiditate totam, eum quae alias! Dicta, nisi.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate beatae impedit officia quis odit rerum sequi, explicabo commodi illum suscipit, tempore eum doloremque quae obcaecati tempora quidem neque sapiente modi?</p>
-    </div>
-  </section>
-
-  <section class="module parallax parallax-3">
-    <div class="container">
-      <h1></h1>
-    </div>
-  </section>
-
-  <section class="module content">
-    <div class="container">
-      <h2>Lorem Ipsum Dolor</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil consequuntur, nesciunt dicta, esse rem ducimus itaque quis. Adipisci ullam nam qui illum debitis sit ad in delectus, repudiandae non dolorum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit veritatis, facere aliquid itaque tempore consequatur nihil sint enim aliquam id saepe magnam totam repellat placeat a fugit nulla molestias voluptas.
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta cum distinctio eum asperiores rem enim fugit eaque voluptas est laboriosam in repudiandae architecto placeat, illum atque quasi explicabo, culpa, molestias!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit voluptas, aperiam quae provident, recusandae rem quis. Ut quaerat, quasi iste voluptate et dolorem atque sed neque voluptates, molestias dolor enim!
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam odit tempore, quibusdam impedit deserunt. Natus quisquam, facilis numquam, molestias nesciunt modi, at debitis maxime sunt et quo quas labore perferendis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde delectus laborum doloremque recusandae, debitis maxime a! Nihil distinctio ex, cumque tempore ea voluptas omnis odit, quaerat natus nam excepturi corporis!
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque eius harum atque unde nihil aut quam provident sunt, iste error vitae suscipit dolores cupiditate totam, eum quae alias! Dicta, nisi.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate beatae impedit officia quis odit rerum sequi, explicabo commodi illum suscipit, tempore eum doloremque quae obcaecati tempora quidem neque sapiente modi?</p>
-    </div>
-  </section>
+  <br /><br />
+  <%= link_to 'Create a new user!', new_user_path %>
+  </div>
+</section>
 
 
 <script>
-(function(){
+  (function(){
 
-  var parallax = document.querySelectorAll(".parallax"),
-      speed = 0.5;
+    var parallax = document.querySelectorAll(".parallax"),
+        speed = 0.5;
 
-	  window.onscroll = function(){
-	    [].slice.call(parallax).forEach(function(el,i){
+    window.onscroll = function(){
+      [].slice.call(parallax).forEach(function(el,i){
 
-	      var windowYOffset = window.pageYOffset,
-	          elBackgrounPos = "50% " + (windowYOffset * speed) + "px";
-	      
-	      el.style.backgroundPosition = elBackgrounPos;
+        var windowYOffset = window.pageYOffset,
+            elBackgrounPos = "50% " + (windowYOffset * speed) + "px";
+        
+        el.style.backgroundPosition = elBackgrounPos;
 
       });
-  };
-})();
+    };
 
-
+  })();
+</script>
+<script>
+  (function() {
+    // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+    if (!String.prototype.trim) {
+    (function() {
+    // Make sure we trim BOM and NBSP
+    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+    String.prototype.trim = function() {
+    return this.replace(rtrim, ”);
+    };
+    })();
+    }
+    [].slice.call( document.querySelectorAll( ‘input.input__field’ ) ).forEach( function( inputEl ) {
+    // in case the input is already filled..
+    if( inputEl.value.trim() !== ” ) {
+    classie.add( inputEl.parentNode, ‘input–filled’ );
+    }
+    // events:
+    inputEl.addEventListener( ‘focus’, onInputFocus );
+    inputEl.addEventListener( ‘blur’, onInputBlur );
+    } );
+    function onInputFocus( ev ) {
+    classie.add( ev.target.parentNode, ‘input–filled’ );
+    }
+    function onInputBlur( ev ) {
+    if( ev.target.value.trim() === ” ) {
+    classie.remove( ev.target.parentNode, ‘input–filled’ );
+    }
+    }
+    })();
 </script>
