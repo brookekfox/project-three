@@ -12,8 +12,7 @@
       <%= f.text_field :email,        placeholder: 'EMAIL',   autofocus:true %><br>
       <%= f.password_field :password, placeholder: 'PASSWORD' %><br><br>
 
-      <%= f.submit 'Log In' %>
-    <% end %>
+      
   </div>
   
     <section class="content bgcolor-4">
@@ -39,6 +38,9 @@
   </section>
   <br /><br />
   <%= link_to 'Create a new user!', new_user_path %>
+  <br />
+    <%= f.submit 'Log In' %>
+    <% end %>
   </div>
 </section>
 
