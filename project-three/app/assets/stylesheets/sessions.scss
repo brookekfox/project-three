@@ -1,3 +1,204 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* ============================================================
+  PRIMARY STRUCTURE
+============================================================ */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ================================================= */
+
+.bgcolor-4 { background: #2f3238; color: #fff; }
+
+.input {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin: 1em;
+  max-width: 400px;
+  width: calc(100% - 2em);
+  vertical-align: top;
+}
+
+.input__field {
+  position: relative;
+  display: block;
+  float: right;
+  padding: 1.8em;
+  width: 60%;
+  border: none;
+  border-radius: 0;
+  background: #f0f0f0;
+  color: #aaa;
+  font-weight: bold;
+  font-family: "Lora", serif;
+  -webkit-appearance: none; /* for box shadows to show on iOS */
+}
+
+.input__field:focus {
+  outline: none;
+}
+
+.input__label {
+  display: inline-block;
+  float: right;
+  padding: 0 1em;
+  width: 40%;
+  color: #6a7989;
+  font-weight: bold;
+  font-size: 16px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.input__label-content {
+  position: relative;
+  display: block;
+  padding: 6em 0;
+  text-align: left;
+  width: 100%;
+}
+
+.graphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: none;
+}
+
+.icon {
+  color: #ddd;
+  font-size: 150%;
+}
+
+
+/* Madoka */
+.input--madoka {
+  margin: 1.5em;
+}
+
+.input__field--madoka {
+  width: 80%;
+  font-size: 16px;
+  background: transparent;
+  color: red;
+}
+
+.input__label--madoka {
+  position: absolute;
+  width: 90%;
+  height: 100%;
+  color: #7A7593;
+  text-align: left;
+  cursor: text;
+}
+
+.input__label-content--madoka {
+  -webkit-transform-origin: 0% 50%;
+  transform-origin: 0% 50%;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+.graphic--madoka {
+  -webkit-transform: scale3d(1, -1, 1);
+  transform: scale3d(1, -1, 1);
+  -webkit-transition: stroke-dashoffset 0.3s;
+  transition: stroke-dashoffset 0.3s;
+  pointer-events: none;
+
+  stroke: #7A7593;
+  stroke-width: 4px;
+  stroke-dasharray: 962;
+  stroke-dashoffset: 558;
+}
+
+.input__field--madoka:focus + .input__label--madoka,
+.input--filled .input__label--madoka {
+  cursor: default;
+  pointer-events: none;
+}
+
+.input__field--madoka:focus + .input__label--madoka .graphic--madoka,
+.input--filled .graphic--madoka {
+  stroke-dashoffset: 0;
+}
+
+.input__field--madoka:focus + .input__label--madoka .input__label-content--madoka,
+.input--filled .input__label-content--madoka {
+  -webkit-transform: scale3d(1, 0, 0) translate3d(0, 1em, 0);
+  transform: scale3d(1, 0, 0) translate3d(0, 1em, 0);
+}
+
+
+/* ============================================================
+  SECTIONS
+============================================================ */
+section.module:last-child {
+  margin-bottom: 0;
+}
+section.module h2 {
+  margin-bottom: 40px;
+  font-family: "Sigmar One", cursive;
+  font-size: 30px;
+}
+section.module p {
+  margin-bottom: 40px;
+  font-size: 16px;
+  font-weight: 300;
+}
+section.module p:last-child {
+  margin-bottom: 0;
+}
+section.module.content {
+  padding: 40px 0;
+  height: 800px;
+  background:#2f3238; color: #fff;
+}
+section.module.parallax {
+  padding: 240px 0;
+  background-position: 0 0;
+}
+section.module.parallax h1 {
+  color: #1e1e1e;
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 0 10px white;
+}
+section.module.parallax-1 {
+  background-image: url(image_path("bg-1.jpg"));
+  background-repeat: no-repeat;
+  height: 1000px;
+}
+
+@media all and (min-width: 600px) {
+  section.module h2 {
+    font-size: 42px;
+  }
+  section.module p {
+    font-size: 20px;
+  }
+  section.module.parallax {
+    padding: 300px 0;
+  }
+  section.module.parallax h1 {
+    font-size: 96px;
+  }
+}
+@media all and (min-width: 960px) {
+  section.module.parallax h1 {
+    font-size: 100px;
+    font-family: "Sigmar One", cursive;
+  }
+}
