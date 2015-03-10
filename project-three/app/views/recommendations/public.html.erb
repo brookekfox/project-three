@@ -40,19 +40,20 @@
 					</td>
 					<td>
 						<% if rec.social_media == 'Instagram' %>
-							<% @query = rec.handle %>
-							<% profile_pic = HTTParty.get(@base_url+@search_access_token+@query+'&count=1')['data'][0]['profile_picture'] %>
-							<%= image_tag profile_pic %>
-							<%# elsif rec.social_media == 'Twitter' %>
-							<%#= rec.handle %>
+							<% query = rec.handle %>
+							<%= image_tag HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['profile_picture'] %>
+						<% elsif rec.social_media == 'Twitter' %>
+							<%= image_tag $twitter.user(rec.handle).profile_image_uri(size=:bigger) %>
 						<% end %>
 					</td>
 					<td>
 						<% if rec.social_media == 'Instagram' %>
-							<% @query = rec.handle %>
-							<% @insta_user_id = HTTParty.get(@base_url+@search_access_token+@query+'&count=1')['data'][0]['id'].to_s %>
-							<% most_recent_photo = HTTParty.get(@base_url+@insta_user_id+@photo_access_token+'&count=1')['data'][0]['images']['thumbnail']['url'] %>
+							<% query = rec.handle %>
+							<% insta_user_id = HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['id'].to_s %>
+							<% most_recent_photo = HTTParty.get(@base_url+insta_user_id+@photo_access_token+'&count=1')['data'][0]['images']['thumbnail']['url'] %>
 							<%= image_tag most_recent_photo %>
+						<% elsif rec.social_media == 'Twitter' %>
+							<%= $twitter.user_timeline(rec.handle).first.text %>
 						<% end %>
 					</td>
 					<!--<td class="actions-for-current-user">-->
