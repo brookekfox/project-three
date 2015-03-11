@@ -1,5 +1,5 @@
 <input type="hidden" class="SessionValue" value="<%= session['user_id'] %>">
-<div style="margin:0 auto; width:60%; border:4px double black; padding:2%; border-radius:10px">
+<div style="margin:0 auto; width:95%; border:4px double black; padding:2%; border-radius:10px">
 	<h1>Recommendations!</h1>
 
 	<%= link_to 'Make a new recommendation', new_recommendation_path(session['user_id']) %><br>
@@ -7,7 +7,7 @@
 	<%= link_to 'Log out', sessions_path, method: :delete %>
 
 	<div style="border: 1px solid black;border-radius:10px;padding:2%">
-		<h2 class="actions-for-current-user">RECOMMENDATIONS RECEIVED</h2>
+		<h2>RECOMMENDATIONS RECEIVED</h2>
 		<table>
 			<thead>
 			<tr>
@@ -71,7 +71,37 @@
 						<!--date-->
 					<td><%= rec.created_at.to_date.strftime("%a %B %d, %Y") %></td>
 						<!--tags-->
-					<td></td>
+					<td>
+						<div class="tags-container">
+							<% if rec.is_blog %>
+								<div class="tag">blog</div>
+							<% end %>
+							<% if rec.is_fashion %>
+								<div class="tag">fashion</div>
+							<% end %>
+							<% if rec.is_film %>
+								<div class="tag">film</div>
+							<% end %>
+							<% if rec.is_food %>
+								<div class="tag">food</div>
+							<% end %>
+							<% if rec.is_funny %>
+								<div class="tag">funny</div>
+							<% end %>
+							<% if rec.is_music %>
+								<div class="tag">music</div>
+							<% end %>
+							<% if rec.is_news %>
+								<div class="tag">news</div>
+							<% end %>
+							<% if rec.is_sports %>
+								<div class="tag">sports</div>
+							<% end %>
+							<% if rec.is_tv %>
+								<div class="tag">tv</div>
+							<% end %>
+						</div>
+					</td>
 						<!--actions-->
 					<td><%= link_to 'View', rec %>
 							<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %></td>
@@ -147,8 +177,38 @@
 					</td>
 						<!--date-->
 					<td><%= rec.created_at.to_date.strftime("%a %B %d, %Y") %></td>
-						<!--tags-->
-					<td></td>
+					<!--tags-->
+					<td>
+						<div class="tags-container">
+							<% if rec.is_blog %>
+								<div class="tag">blog</div>
+							<% end %>
+							<% if rec.is_fashion %>
+								<div class="tag">fashion</div>
+							<% end %>
+							<% if rec.is_film %>
+								<div class="tag">film</div>
+							<% end %>
+							<% if rec.is_food %>
+								<div class="tag">food</div>
+							<% end %>
+							<% if rec.is_funny %>
+								<div class="tag">funny</div>
+							<% end %>
+							<% if rec.is_music %>
+								<div class="tag">music</div>
+							<% end %>
+							<% if rec.is_news %>
+								<div class="tag">news</div>
+							<% end %>
+							<% if rec.is_sports %>
+								<div class="tag">sports</div>
+							<% end %>
+							<% if rec.is_tv %>
+								<div class="tag">tv</div>
+							<% end %>
+						</div>
+					</td>
 						<!--actions-->
 					<td><%= link_to 'View', rec %>
 							<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %>

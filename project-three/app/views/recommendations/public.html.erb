@@ -1,12 +1,8 @@
-<!--<div style="margin:0 auto; width:20%; border:4px double deeppink; color:darkgreen; padding:2%;
-border-radius:10px">
-	<%#= link_to 'My user page', recommendations_path %>
-</div>-->
+<%#= link_to 'My user page', recommendations_path %>
 
 <div style="margin:0 auto; width:60%; border:4px double black; padding:2%; border-radius:10px">
 	<h1><%= @user.first_name.capitalize %>'s Recommendations!</h1>
 
-	<h2>RECOMMENDATIONS</h2>
 	<div>
 		<table>
 			<thead>
@@ -54,6 +50,38 @@ border-radius:10px">
 						<% elsif rec.social_media == 'Twitter' %>
 							<%= $twitter.user_timeline(rec.handle).first.text %>
 						<% end %>
+					</td>
+					<!--tags-->
+					<td>
+						<div class="tags-container">
+							<% if rec.is_blog %>
+								<div class="tag">blog</div>
+							<% end %>
+							<% if rec.is_fashion %>
+								<div class="tag">fashion</div>
+							<% end %>
+							<% if rec.is_film %>
+								<div class="tag">film</div>
+							<% end %>
+							<% if rec.is_food %>
+								<div class="tag">food</div>
+							<% end %>
+							<% if rec.is_funny %>
+								<div class="tag">funny</div>
+							<% end %>
+							<% if rec.is_music %>
+								<div class="tag">music</div>
+							<% end %>
+							<% if rec.is_news %>
+								<div class="tag">news</div>
+							<% end %>
+							<% if rec.is_sports %>
+								<div class="tag">sports</div>
+							<% end %>
+							<% if rec.is_tv %>
+								<div class="tag">tv</div>
+							<% end %>
+						</div>
 					</td>
 					<td>
 						<% if @user.id == session['user_id'].to_i %>
