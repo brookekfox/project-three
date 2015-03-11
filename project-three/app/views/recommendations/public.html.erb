@@ -1,4 +1,5 @@
 <%#= link_to 'My user page', recommendations_path %>
+<%= render 'nav' %>
 
 <div style="margin:0 auto; width:60%; border:4px double black; padding:2%; border-radius:10px">
 	<h1><%= @user.first_name.capitalize %>'s Recommendations!</h1>
@@ -16,7 +17,7 @@
 			</thead>
 
 			<tbody>
-			<% @recommendations.sort_by { |r| r[:social_media] }.each do |rec| %>
+			<% @recommendations.each do |rec| %>
 				<tr>
 					<!--<td><%#= rec.social_media %></td>-->
 					<td>
@@ -85,7 +86,7 @@
 					</td>
 					<td>
 						<% if @user.id == session['user_id'].to_i %>
-							<%= link_to 'View', rec %>
+							<%#= link_to 'View', rec %>
 							<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %>
 							<%= link_to 'Edit', edit_recommendation_path(rec) %>
 						<% end %>

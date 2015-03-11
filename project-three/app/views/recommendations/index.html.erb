@@ -1,22 +1,19 @@
-<input type="hidden" class="SessionValue" value="<%= session['user_id'] %>">
+<%= render 'nav' %>
+
 <div style="margin:0 auto; width:95%; border:4px double black; padding:2%; border-radius:10px">
 	<h1>Recommendations!</h1>
-
-	<%= link_to 'Make a new recommendation', new_recommendation_path(session['user_id']) %><br>
-	<%= link_to 'My public recommendations', public_recommendations_path(session['user_id']) %><br><br>
-	<%= link_to 'Log out', sessions_path, method: :delete %>
 
 	<div style="border: 1px solid black;border-radius:10px;padding:2%">
 		<h2>RECOMMENDATIONS RECEIVED</h2>
 		<table>
 			<thead>
 			<tr>
-				<th><%= link_to 'FROM', :sort => 'user_id' %></th>
-				<th><%= link_to 'SOCIAL MEDIA', :sort => 'social_media' %></th>
-				<th><%= link_to 'HANDLE', :sort => 'handle' %></th>
+				<th>FROM<%#= link_to 'FROM', :sort => 'user_id' %></th>
+				<th>SOCIAL MEDIA<%#= link_to 'SOCIAL MEDIA', :sort => 'social_media' %></th>
+				<th>HANDLE<%#= link_to 'HANDLE', :sort => 'handle' %></th>
 				<th>PROFILE PICTURE</th>
 				<th>MOST RECENT UPDATE</th>
-				<th><%= link_to 'DATE', :sort => 'created_at' %></th>
+				<th>DATE<%#= link_to 'DATE', :sort => 'created_at' %></th>
 				<th>TAGS</th>
 				<th>ACTIONS</th>
 				<th colspan="8"></th>
@@ -116,12 +113,12 @@
 		<table>
 			<thead>
 			<tr>
-				<th><%= link_to 'TO', :sort => 'user_id_to' %></th>
-				<th><%= link_to 'SOCIAL MEDIA', :sort => 'social_media' %></th>
-				<th><%= link_to 'HANDLE', :sort => 'handle' %></th>
+				<th>TO<%#= link_to 'TO', :sort => 'user_id_to' %></th>
+				<th>SOCIAL MEDIA<%#= link_to 'SOCIAL MEDIA', :sort => 'social_media' %></th>
+				<th>HANDLE<%#= link_to 'HANDLE', :sort => 'handle' %></th>
 				<th>PROFILE PICTURE</th>
 				<th>MOST RECENT UPDATE</th>
-				<th><%= link_to 'DATE', :sort => 'created_at' %></th>
+				<th>DATE<%#= link_to 'DATE', :sort => 'created_at' %></th>
 				<th>TAGS</th>
 				<th>ACTIONS</th>
 				<th colspan="6"></th>

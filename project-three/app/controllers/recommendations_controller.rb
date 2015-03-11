@@ -2,7 +2,7 @@ class RecommendationsController < ApplicationController
 
   def index
 		@users = User.all
-		@recommendations = Recommendation.all.order(params[:sort])
+		@recommendations = Recommendation.all.order('created_at DESC')
 
 		@base_url            = 'https://api.instagram.com/v1/users/'
 		@search_access_token = 'search?access_token=' + ENV['INSTAGRAM_API_KEY'] + '&q='
@@ -13,7 +13,7 @@ class RecommendationsController < ApplicationController
 
 	def public
 		# @recommendations = Recommendation.all
-		@recommendations = Recommendation.all.where(user_id:params[:id]).order(params[:sort])
+		@recommendations = Recommendation.all.where(user_id:params[:id]).order('social_media DESC, handle ASC')
 		@user = User.find(params[:id])
 
 		@base_url            = 'https://api.instagram.com/v1/users/'
