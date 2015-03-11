@@ -1,0 +1,99 @@
+<%#= link_to 'My user page', recommendations_path %>
+<%= render 'nav' %>
+
+<div style="margin:0 auto; width:60%; border:4px double black; padding:2%; border-radius:10px">
+	<h1><%= @user.first_name.capitalize %>'s Recommendations!</h1>
+
+	<div>
+		<table>
+			<thead>
+			<tr>
+				<!--<th>SOCIAL MEDIA</th>-->
+				<!--<th>HANDLE</th>-->
+				<!--<th>TAGS</th>-->
+				<!--<th>ACTIONS</th>-->
+				<!--<th colspan="4"></th>-->
+			</tr>
+			</thead>
+
+			<tbody>
+			<% @recommendations.each do |rec| %>
+				<tr>
+					<!--<td><%#= rec.social_media %></td>-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= image_tag('twitter.png') %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= image_tag('instagram.png') %>
+						<% end %>
+					</td>
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= link_to "@#{rec.handle}", "http://instagram.com/#{rec.handle}" %>
+						<% end %>
+					</td>
+					<td>
+						<% if rec.social_media == 'Instagram' %>
+							<% query = rec.handle %>
+							<%= image_tag HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['profile_picture'] %>
+						<% elsif rec.social_media == 'Twitter' %>
+							<%= image_tag $twitter.user(rec.handle).profile_image_uri(size=:bigger) %>
+						<% end %>
+					</td>
+					<td>
+						<% if rec.social_media == 'Instagram' %>
+							<% query = rec.handle %>
+							<% insta_user_id = HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['id'].to_s %>
+							<% most_recent_photo = HTTParty.get(@base_url+insta_user_id+@photo_access_token+'&count=1')['data'][0]['images']['thumbnail']['url'] %>
+							<%= image_tag most_recent_photo %>
+						<% elsif rec.social_media == 'Twitter' %>
+							<%= $twitter.user_timeline(rec.handle).first.text %>
+						<% end %>
+					</td>
+					<!--tags-->
+					<td>
+						<div class="tags-container">
+							<% if rec.is_blog %>
+								<div class="tag">blog</div>
+							<% end %>
+							<% if rec.is_fashion %>
+								<div class="tag">fashion</div>
+							<% end %>
+							<% if rec.is_film %>
+								<div class="tag">film</div>
+							<% end %>
+							<% if rec.is_food %>
+								<div class="tag">food</div>
+							<% end %>
+							<% if rec.is_funny %>
+								<div class="tag">funny</div>
+							<% end %>
+							<% if rec.is_music %>
+								<div class="tag">music</div>
+							<% end %>
+							<% if rec.is_news %>
+								<div class="tag">news</div>
+							<% end %>
+							<% if rec.is_sports %>
+								<div class="tag">sports</div>
+							<% end %>
+							<% if rec.is_tv %>
+								<div class="tag">tv</div>
+							<% end %>
+						</div>
+					</td>
+					<td>
+						<% if @user.id == session['user_id'].to_i %>
+							<%#= link_to 'View', rec %>
+							<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %>
+							<%= link_to 'Edit', edit_recommendation_path(rec) %>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

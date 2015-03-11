@@ -1,0 +1,27 @@
+<%= render 'nav' %>
+<div style="margin:0 auto; width:60%; border:4px double black; padding:2%; border-radius:10px">
+	<div>
+		<h1>@<%= @recommendation.handle %></h1>
+		
+		<% if @recommendation.social_media == 'Instagram' %>
+			<% query = @recommendation.handle %>
+			<%= image_tag HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['profile_picture'] %>
+		<% elsif @recommendation.social_media == 'Twitter' %>
+			<%= image_tag $twitter.user(@recommendation.handle).profile_image_uri(size=:bigger) %>
+		<% end %>
+
+		<% if @recommendation.social_media == 'Instagram' %>
+			<% query = @recommendation.handle %>
+			<% insta_user_id = HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['id'].to_s %>
+			<% most_recent_photo = HTTParty.get(@base_url+insta_user_id+@photo_access_token+'&count=1')['data'][0]['images']['thumbnail']['url'] %>
+			<%= image_tag most_recent_photo %>
+		<% elsif @recommendation.social_media == 'Twitter' %>
+			<%= $twitter.user_timeline(@recommendation.handle).first.text %>
+		<% end %>
+		
+		<h3>Sent to <%= link_to @users.find(@recommendation.user_id_to).first_name.capitalize, public_recommendations_path(@recommendation.user_id_to) %> from <%= link_to @recommendation.user.first_name.capitalize, public_recommendations_path(@recommendation.user.id) %></h3>
+	</div>
+
+	<%= link_to 'User page', recommendations_path %><br>
+	<%= link_to 'Public recommendations', public_recommendations_path(session['user_id']) %>
+</div>

@@ -1,0 +1,219 @@
+<%= render 'nav' %>
+
+<div style="margin:0 auto; width:95%; border:4px double black; padding:2%; border-radius:10px">
+	<h1>Recommendations!</h1>
+
+	<div style="border: 1px solid black;border-radius:10px;padding:2%">
+		<h2>RECOMMENDATIONS RECEIVED</h2>
+		<table>
+			<thead>
+			<tr>
+				<th>FROM<%#= link_to 'FROM', :sort => 'user_id' %></th>
+				<th>SOCIAL MEDIA<%#= link_to 'SOCIAL MEDIA', :sort => 'social_media' %></th>
+				<th>HANDLE<%#= link_to 'HANDLE', :sort => 'handle' %></th>
+				<th>PROFILE PICTURE</th>
+				<th>MOST RECENT UPDATE</th>
+				<th>DATE<%#= link_to 'DATE', :sort => 'created_at' %></th>
+				<th>TAGS</th>
+				<th>ACTIONS</th>
+				<th colspan="8"></th>
+			</tr>
+			</thead>
+
+			<tbody>
+			<% @recommendations.where(is_private:true, user_id_to:session['user_id'])
+												 .each do |rec| %>
+				<tr>
+						<!--from-->
+					<td>
+						<%= link_to rec.user.first_name.capitalize, public_recommendations_path(rec.user.id) %><br>
+						<span style="font-size:x-small;font-style:italic"> <%= rec.user.email %> </span>
+					</td>
+						<!--social media-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= image_tag('twitter.png') %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= image_tag('instagram.png') %>
+						<% end %>
+					</td>
+						<!--handle-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= link_to "@#{rec.handle}", "http://instagram.com/#{rec.handle}" %>
+						<% end %>
+					</td>
+						<!--profile picture-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= image_tag $twitter.user(rec.handle).profile_image_uri(size=:bigger) %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<% query = rec.handle %>
+							<%= image_tag HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['profile_picture'] %>
+						<% end %>
+					</td>
+						<!--most recent-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= $twitter.user_timeline(rec.handle).first.text %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<% query = rec.handle %>
+							<% insta_user_id = HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['id'].to_s %>
+							<% most_recent_photo = HTTParty.get(@base_url+insta_user_id+@photo_access_token+'&count=1')['data'][0]['images']['thumbnail']['url'] %>
+							<%= image_tag most_recent_photo %>
+						<% end %>
+					</td>
+						<!--date-->
+					<td><%= rec.created_at.to_date.strftime("%a %B %d, %Y") %></td>
+						<!--tags-->
+					<td>
+						<div class="tags-container">
+							<% if rec.is_blog %>
+								<div class="tag">blog</div>
+							<% end %>
+							<% if rec.is_fashion %>
+								<div class="tag">fashion</div>
+							<% end %>
+							<% if rec.is_film %>
+								<div class="tag">film</div>
+							<% end %>
+							<% if rec.is_food %>
+								<div class="tag">food</div>
+							<% end %>
+							<% if rec.is_funny %>
+								<div class="tag">funny</div>
+							<% end %>
+							<% if rec.is_music %>
+								<div class="tag">music</div>
+							<% end %>
+							<% if rec.is_news %>
+								<div class="tag">news</div>
+							<% end %>
+							<% if rec.is_sports %>
+								<div class="tag">sports</div>
+							<% end %>
+							<% if rec.is_tv %>
+								<div class="tag">tv</div>
+							<% end %>
+						</div>
+					</td>
+						<!--actions-->
+					<td><%= link_to 'View', rec %>
+							<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+	</div>
+
+	<div style="border: 1px solid black;border-radius:10px;padding:2%">
+		<h2 class="actions-for-current-user">RECOMMENDATIONS SENT</h2>
+		<table>
+			<thead>
+			<tr>
+				<th>TO<%#= link_to 'TO', :sort => 'user_id_to' %></th>
+				<th>SOCIAL MEDIA<%#= link_to 'SOCIAL MEDIA', :sort => 'social_media' %></th>
+				<th>HANDLE<%#= link_to 'HANDLE', :sort => 'handle' %></th>
+				<th>PROFILE PICTURE</th>
+				<th>MOST RECENT UPDATE</th>
+				<th>DATE<%#= link_to 'DATE', :sort => 'created_at' %></th>
+				<th>TAGS</th>
+				<th>ACTIONS</th>
+				<th colspan="6"></th>
+			</tr>
+			</thead>
+
+			<tbody>
+			<% @recommendations.where(is_private:true, user_id:session['user_id'])
+												 .where.not(user_id_to:nil)
+												 .each do |rec| %>
+				<tr>
+						<!--to-->
+					<td>
+						<%= link_to @users.find(rec.user_id_to).first_name.capitalize, public_recommendations_path(rec.user_id_to) %><br>
+						<span style="font-size:x-small;font-style:italic"><%= @users.find(rec.user_id_to).email %></span>
+					</td>
+						<!--social media-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= image_tag('twitter.png') %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= image_tag('instagram.png') %>
+						<% end %>
+					</td>
+						<!--handle-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= link_to "@#{rec.handle}", "http://twitter.com/#{rec.handle}" %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<%= link_to "@#{rec.handle}", "http://instagram.com/#{rec.handle}" %>
+						<% end %>
+					</td>
+						<!--profile picture-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= image_tag $twitter.user(rec.handle).profile_image_uri(size=:bigger) %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<% query = rec.handle %>
+							<% prof_pic = HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['profile_picture'] %>
+							<%= image_tag prof_pic %>
+						<% end %>
+					</td>
+						<!--most recent-->
+					<td>
+						<% if rec.social_media == 'Twitter' %>
+							<%= $twitter.user_timeline(rec.handle).first.text %>
+						<% elsif rec.social_media == 'Instagram' %>
+							<% query = rec.handle %>
+							<% insta_user_id = HTTParty.get(@base_url+@search_access_token+query+'&count=1')['data'][0]['id'].to_s %>
+							<% most_recent_photo = HTTParty.get(@base_url+insta_user_id+@photo_access_token+'&count=1')['data'][0]['images']['thumbnail']['url'] %>
+							<%= image_tag most_recent_photo %>
+						<% end %>
+					</td>
+						<!--date-->
+					<td><%= rec.created_at.to_date.strftime("%a %B %d, %Y") %></td>
+					<!--tags-->
+					<td>
+						<div class="tags-container">
+							<% if rec.is_blog %>
+								<div class="tag">blog</div>
+							<% end %>
+							<% if rec.is_fashion %>
+								<div class="tag">fashion</div>
+							<% end %>
+							<% if rec.is_film %>
+								<div class="tag">film</div>
+							<% end %>
+							<% if rec.is_food %>
+								<div class="tag">food</div>
+							<% end %>
+							<% if rec.is_funny %>
+								<div class="tag">funny</div>
+							<% end %>
+							<% if rec.is_music %>
+								<div class="tag">music</div>
+							<% end %>
+							<% if rec.is_news %>
+								<div class="tag">news</div>
+							<% end %>
+							<% if rec.is_sports %>
+								<div class="tag">sports</div>
+							<% end %>
+							<% if rec.is_tv %>
+								<div class="tag">tv</div>
+							<% end %>
+						</div>
+					</td>
+						<!--actions-->
+					<td><%= link_to 'View', rec %>
+							<%= link_to 'Delete', rec, method: :delete, data: {confirm: 'Are you sure?'} %>
+							<%= link_to 'Edit', edit_recommendation_path(rec) %></td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+		</div>
+
+</div>

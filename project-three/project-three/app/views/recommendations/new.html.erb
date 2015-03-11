@@ -1,0 +1,55 @@
+<%= render 'nav' %>
+<div class="row">
+	<div class="col-md-12 text-center"><h1 class="heading">Make a new recommendation!</h1></div>
+</div>
+
+<% if @recommendation.errors.any? %>
+	<div id="error-explanation">
+		Try again, dum dum!<br>
+		<% @recommendation.errors.full_messages.each do |msg| %>
+			<%= msg %><br>
+		<% end %>
+	</div>
+<% end %>
+
+<div>
+	<%= form_for @recommendation do |f| %>
+		<%#= f.collection_select :user_id, User.all, :id, :email, include_blank: 'User' %>
+		<%= f.hidden_field :user_id, value:session['user_id'] %>
+
+		First choose TWITTER or INSTAGRAM: <br>
+			<%= f.radio_button(:social_media, 'Twitter') %>
+			<%= f.label(:social_media, 'Twitter') %>
+			<%= f.radio_button(:social_media, 'Instagram') %>
+			<%= f.label(:social_media, 'Instagram') %><br><br>
+
+		Now enter the handle you want to recommend:<br>
+			@<%= f.text_field :handle %><br><br>
+
+		Private? <%= f.check_box :is_private, class: 'private_checkbox' %><br>
+		<div class="private_recommendation">
+			To whom do you want to send it?<br>
+			<%= f.collection_select :user_id_to, User.where.not(id:session['user_id']).order('email ASC'), :id, :email, include_blank: '' %>
+		</div>
+
+		<br>
+		Add some tags!
+		<table>
+			<tr><td>Blog</td><td><%= f.check_box :is_blog %></td></tr>
+			<tr><td>Fashion</td><td><%= f.check_box :is_fashion %></td></tr>
+			<tr><td>Film</td><td><%= f.check_box :is_film %></td></tr>
+			<tr><td>Food</td><td><%= f.check_box :is_food %></td></tr>
+			<tr><td>Funny</td><td><%= f.check_box :is_funny %></td></tr>
+			<tr><td>Music</td><td><%= f.check_box :is_music %></td></tr>
+			<tr><td>News</td><td><%= f.check_box :is_news %></td></tr>
+			<tr><td>Sports</td><td><%= f.check_box :is_sports %></td></tr>
+			<tr><td>TV</td><td><%= f.check_box :is_tv %></td></tr>
+		</table>
+
+
+		<%= f.submit %>
+	<% end %>
+
+	<%= link_to 'Cancel', recommendations_path(session['user_id']) %>
+</div>
+

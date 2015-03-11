@@ -1,0 +1,25 @@
+<%= render 'nav' %>
+
+<% if @user.errors.any? %>
+	<div id="error-explanation">
+		Try again, dum dum!<br>
+		<% @user.errors.full_messages.each do |msg| %>
+			<%= msg %><br>
+		<% end %>
+	</div>
+<% end %>
+
+<div>
+	<%= form_for @user do |f| %>
+		<%= f.text_field :first_name,                placeholder: 'FIRST NAME' %>
+		<%= f.text_field :last_name,                 placeholder: 'LAST NAME (optional)' %><br>
+		<%= f.text_field :email,                     placeholder: 'EMAIL' %><br><br>
+
+		<%= f.text_field :twitter,									 placeholder: 'TWITTER' %> and/or
+		<%= f.text_field :instagram,								 placeholder: 'INSTAGRAM' %><br><br>
+
+		<%= f.submit %>
+	<% end %>
+	<%= link_to 'Cancel', recommendations_path %>
+</div>
+
